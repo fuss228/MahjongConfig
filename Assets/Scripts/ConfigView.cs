@@ -37,6 +37,8 @@ public class ConfigView : MonoBehaviour {
 
 	public Button btnCreate;
 	public Button btnReset;
+    public Button btnExit;
+
 
 	public Dictionary<string, GameObject> dicAllMj = new Dictionary<string, GameObject>();
 
@@ -57,6 +59,7 @@ public class ConfigView : MonoBehaviour {
 		playerBtns [0].gameObject.GetComponent<Image> ().color = Color.green;
 		btnCreate.onClick.AddListener (OnCreateButtonClicked);
 		btnReset.onClick.AddListener (OnResetButtonClicked);
+        btnExit.onClick.AddListener(OnExitButtonClicked);
 	}
 	
 	// Update is called once per frame
@@ -320,8 +323,22 @@ public class ConfigView : MonoBehaviour {
 			handMjObj[i] = new ArrayList ();
 
 		}
+
+
+        foreach (string key  in dicAllMj.Keys)
+        {
+            GameObject mjp = dicAllMj [key];
+            mjp.GetComponent<Mahjong>().clickedCount = 0;
+        }
 			
 
 
 	}
+
+
+    void OnExitButtonClicked()
+    {
+        Application.Quit();
+        Debug.Log("exit");
+    }
 }
